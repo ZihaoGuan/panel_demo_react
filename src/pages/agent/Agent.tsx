@@ -1,6 +1,6 @@
 import React from "react";
-import style from "../styles/Agent.module.scss";
-import "../assets/font-icons/fonts.css";
+import style from "./Agent.module.sass";
+import "../../assets/font-icons/fonts.css";
 
 function Agent() {
   return (

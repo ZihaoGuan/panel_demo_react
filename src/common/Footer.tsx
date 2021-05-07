@@ -1,6 +1,6 @@
 import React from "react";
-import "../styles/variables.scss";
-import "../styles/Footer.module.scss";
+import "../styles/variables.sass";
+import "./Footer.module.sass";
 import "../assets/font-icons/fonts.css";
 
 function Footer() {

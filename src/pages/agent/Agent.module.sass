@@ -1,0 +1,193 @@
+@import '../../styles/variables.sass'
+@import '../../app.sass'
+
+.box-container
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+
+.box
+  margin: 0.6rem 1.2rem
+  flex-grow: 1
+  flex-basis: 0
+  height: 120px
+  overflow: hidden
+
+.search-box-container
+  position: relative
+  border: 1px solid #ccc
+  margin: 0 2rem
+  background-color: $light-grey-color
+
+.search-box-container i
+  padding: 0.5rem
+  vertical-align: middle
+
+.search-box
+  border: none
+  border-radius: 0
+  padding: 0.5rem 0.5rem 0.5rem 0
+  flex: 1
+  background-color: $light-grey-color
+
+  &:focus
+    outline: none
+
+.box-status
+  position: relative
+  text-align: center
+
+  &::before
+    font-size: 144px
+    position: absolute
+    right: 0
+    left: 0
+    top: -11px
+    opacity: 0.2
+    line-height: 144px
+
+  &.box-building::before
+    font-family: "cruise"
+    content: "\f013"
+    -webkit-animation: spin 2s linear infinite
+    -moz-animation: spin 2s linear infinite
+    -o-keyframes: spin 2s linear infinite
+    animation: spin 2s linear infinite
+
+  &.box-idle::before
+    font-family: "cruise"
+    content: "\f0f4"
+
+  span
+    color: white
+
+  .title
+    font-size: 18px
+    font-weight: bold
+    position: absolute
+    top: 0.5em
+    left: 0.5em
+
+  .number
+    font-size: 48px
+    position: absolute
+    bottom: 0.2em
+    right: 0.4em
+
+.control-bar
+  display: flex
+  margin: 0.6rem 1.2rem
+  align-items: center
+  overflow: hidden
+  background: white
+
+  .layout-tab
+    display: none
+    font-size: 20px
+    padding: 0 0.5em
+
+    &.active i
+      color: $light-cyan-color
+
+    &.leftmost
+      margin-left: auto
+
+    &.rightmost
+      margin-right: 1em
+
+.btn
+  cursor: pointer
+
+.item-agents
+  display: block
+
+.box-flex
+  display: flex
+
+  .box-column
+    flex-grow: 1
+    flex-basis: 0
+    display: flex
+    justify-content: space-between
+
+@media only screen and (max-width: $tablet-size)
+  .box-flex
+    flex-basis: 100%
+    flex-direction: row
+
+    .box-column
+      flex-direction: column
+      justify-content: space-evenly
+
+      .title
+        padding: 1em 0
+        font-size: 12px
+
+      .number
+        padding: 1em 0
+        font-size: 20px
+
+  .control-bar
+    margin-top: 0
+    background: none
+    flex-wrap: wrap
+
+    .search-box-container
+      order: -1
+      flex-basis: 100%
+      padding: 0.8em
+      background-color: white
+      margin: 0.8em auto
+      display: flex
+      border: none
+
+      input,
+      i
+        background: $light-grey-color
+
+@media only screen and (min-width: $tablet-size) and (max-width: $desktop-HD-size)
+  .box-flex
+    flex-direction: column
+
+    .box-column
+      margin: 0.8em
+      flex-direction: row
+      align-items: center
+
+@media only screen and (min-width: $desktop-size) and (max-width: $desktop-HD-size)
+  .layout-tab
+    display: block !important
+
+@media only screen and (min-width: $desktop-HD-size)
+  .layout-tab
+    display: block !important
+
+  .box-flex
+    .box-column
+      flex-direction: column
+
+      .title
+        padding: 1.5em 0
+        font-size: 12px
+
+      .number
+        padding: 1em 0
+        font-size: 20px
+
+//animation keyframes declaration
+@-moz-keyframes spin
+  100%
+    -moz-transform: rotate(360deg)
+
+@-webkit-keyframes spin
+  100%
+    -webkit-transform: rotate(360deg)
+
+@-o-keyframes spin
+  100%
+    -o-transform: rotate(360deg)
+
+@keyframes spin
+  100%
+    -webkit-transform: rotate(360deg)
+    transform: rotate(360deg)

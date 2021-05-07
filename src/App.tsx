@@ -1,8 +1,8 @@
 import React from "react";
-import Agent from "./views/Agent";
-import Footer from "./components/Footer";
+import Agent from "./pages/agent/Agent";
+import Footer from "./common/Footer";
 
-import "./styles/index.scss";
+import "./app.sass";
 
 class App extends React.Component {
   render() {

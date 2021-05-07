@@ -1,0 +1,98 @@
+@import '../../../styles/variables.sass'
+@import '../../../app.sass'
+
+.item
+  display: flex
+  flex-direction: row
+  margin: 1.2rem
+  padding: 0.8rem
+
+.popup
+  position: relative
+
+.row
+  padding: 0.5em 1em
+
+.row-1 i
+  color: grey
+  margin-right: 0.5em
+  vertical-align: middle
+
+.row-2
+  flex-wrap: wrap
+
+  .btn-square
+    margin-top: 0.5em
+    margin-bottom: 0.1em
+
+.column
+  width: 100%
+  justify-content: space-between
+
+.btn-square
+  height: 30px
+  font-size: 14px
+  line-height: 30px
+  text-align: center
+  padding: 0 0.7em
+  margin-right: 0.7em
+
+.btn
+  cursor: pointer
+
+.btn-delete
+  background: #efefef
+
+.btn-square i
+  height: 30px
+  vertical-align: middle
+
+.btn-blue
+  background-color: $light-cyan-color
+  color: white
+
+  i
+    color: white
+
+  &:hover
+    background-color: $dark-cyan-color
+
+.btn-gray
+  background-color: $dimgray-color
+  color: white
+
+  i
+    color: white
+
+  &:hover
+    background-color: $slategray-color
+
+.rightmost
+  margin-left: auto !important
+  margin-right: 0 !important
+
+.building .status
+  background: $orange-color
+
+.idle .status
+  background: $green-color
+
+.status
+  margin: 0 1.3em
+  padding: 0 0.3em
+
+.ip
+  margin-right: 1em
+
+@media only screen and (max-width: $tablet-size)
+  .building.item
+    border-left: 3px solid $orange-color
+
+  .idle.item
+    border-left: 3px solid $green-color
+
+  .row-1
+    flex-direction: column
+
+    .status
+      display: none
