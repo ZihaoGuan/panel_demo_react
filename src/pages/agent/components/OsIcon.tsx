@@ -1,6 +1,6 @@
 import React from "react";
 
-import style from "./OsIcon.module.sass";
+import style from "./styles/OsIcon.module.sass";
 
 import windows from "../../../assets/os-icons/windows.png";
 import ubuntu from "../../../assets/os-icons/ubuntu.png";

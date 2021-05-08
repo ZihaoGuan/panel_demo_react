@@ -1,6 +1,6 @@
 import React from "react";
 
-import style from "./AgentItem.module.sass";
+import style from "./styles/AgentItem.module.sass";
 import "../../../assets/font-icons/fonts.css";
 
 import OsIcon from "./OsIcon";
@@ -40,7 +40,8 @@ function AgentItem(props: any) {
             <PopupDialog
               show={props.agent.id === props.dialogActive}
               handleCloseDialog={props.handleShowDialog}
-              // :id="agent.id"
+              handleAddResources={props.handleAddResources}
+              id={props.agent.id}
             />
           </div>
           {props.agent.resources.map((res: string) => (
@@ -51,9 +52,7 @@ function AgentItem(props: any) {
               {res}
               <i
                 className={`icomoon icon-trash i-16 ${style["btn"]}`}
-                // @click="
-                //   deleteResourcesByAgentId({ id: agent.id, resource: resource })
-                // "
+                onClick={() => props.handleDeleteResource(props.agent.id, res)}
               ></i>
             </div>
           ))}

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-import style from "./PopupDialog.module.sass";
+import style from "./styles/PopupDialog.module.sass";
 
 function PopupDialog(props: any) {
+  const [value, setValue] = useState<string>("");
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value);
+  };
   return (
     <div
       className={`${style["popup-window"]} white-bg ${
@@ -21,14 +25,19 @@ function PopupDialog(props: any) {
       <div className={`${style["row"]}`}>
         <input
           type="text"
-          //   v-model="value"
+          value={value}
           placeholder="Input Value"
+          onChange={handleChange}
         />
       </div>
       <div className={`${style["row"]}`}>
         <div
           className={`${style["btn-square"]} ${style["btn"]} ${style["btn-blue"]} ${style["btn-add-resources"]}`}
-          // @click="addResources(id, value)"
+          onClick={() => {
+            props.handleAddResources(props.id, value);
+            setValue("");
+            props.handleCloseDialog(null);
+          }}
         >
           Add Resources
         </div>

@@ -1,33 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Agent.module.sass";
 import "../../assets/font-icons/fonts.css";
 
 import AgentItem from "./components/AgentItem";
 import TypeTab from "./components/TypeTab";
 
+import API from "../../api";
+
 function Agent() {
-  const agents = [
-    {
-      id: 1,
-      name: "hey",
-      os: "windows",
-      status: "building",
-      type: "virtual",
-      ip: "11",
-      location: "ff",
-      resources: ["4","55","55555"],
-    },
-    {
-      id: 2,
-      name: "hey",
-      os: "windows",
-      status: "building",
-      type: "virtual",
-      ip: "11",
-      location: "ff",
-      resources: [],
-    },
-  ];
+  const [agents, setAgents] = useState([]);
+
+  useEffect(() => {
+    API.get("agents").then((response) => setAgents(response.data));
+  });
+
+  const getAgentCountByStatus = (status: string) => {
+    if (agents.length === 0) return;
+    const count = agents.reduce((acc: any, cur: any) => {
+      if (cur.status === status) {
+        return ++acc;
+      } else {
+        return acc;
+      }
+    }, 0);
+    return count;
+  };
+
+  const getAgentCount = () => {
+    if (agents.length === 0) return;
+    return agents.length;
+  };
+
+  const getAgentCountByType = (type: string) => {
+    if (agents.length === 0) return;
+    const count = agents.reduce((acc: any, cur: any) => {
+      if (cur.type === type) {
+        return ++acc;
+      } else {
+        return acc;
+      }
+    }, 0);
+    return count;
+  };
+
+  const addResourcesByAgentId = async (id: number, resources: string) => {
+    const resourcesToAdd = resources.split(",");
+    const jsonToUpdate: any = agents.find((agent: any) => agent.id === id);
+    if (jsonToUpdate) {
+      const copy = JSON.parse(JSON.stringify(jsonToUpdate));
+      resourcesToAdd.forEach((element) => {
+        if (element && !copy["resources"].includes(element)) {
+          copy["resources"].push(element);
+        }
+      });
+      const res = await API.put(`agents/${id}`, copy);
+      jsonToUpdate["resources"] = res.data["resources"];
+      setAgents(agents);
+    }
+  };
+
+  const deleteResourceByAgentId = async (id: number, resource: string) => {
+    const jsonToUpdate: any = agents.find((agent: any) => agent.id === id);
+    if (jsonToUpdate) {
+      const copy = JSON.parse(JSON.stringify(jsonToUpdate));
+      copy["resources"] = copy["resources"].filter(
+        (e: string) => e !== resource
+      );
+      const res = await API.put(`agents/${id}`, copy);
+      jsonToUpdate["resources"] = res.data["resources"];
+      setAgents(agents);
+    }
+  };
+
+  const getAgentsByType = (type: string) => {
+    if (type === "all") return agents;
+    return agents.filter((agent: any) => agent.type === type);
+  };
 
   const [tab, setTab] = useState("all");
 
@@ -49,7 +97,7 @@ function Agent() {
         >
           <span className={style["title"]}>Building</span>
           <span className={style["number"]}>
-            {/* {{ this.getAgentCountByStatus("building") }} */}1
+            {getAgentCountByStatus("building")}
           </span>
         </div>
         <div
@@ -57,7 +105,7 @@ function Agent() {
         >
           <span className={style["title"]}>Idle</span>
           <span className={style["number"]}>
-            {/* {{ this.getAgentCountByStatus("idle") }} */}1
+            {getAgentCountByStatus("idle")}
           </span>
         </div>
         <div
@@ -65,20 +113,18 @@ function Agent() {
         >
           <div className={style["box-column"]}>
             <span className={style["title"]}>All</span>
-            <span className={style["number"]}>
-              {/* {{ this.getAgentCount() }} */}1
-            </span>
+            <span className={style["number"]}>{getAgentCount()}</span>
           </div>
           <div className={style["box-column"]}>
             <span className={style["title"]}>PHYSICAL</span>
             <span className={style["number"]}>
-              {/* {{ this.getAgentCountByType("physical") }} */}1
+              {getAgentCountByType("physical")}
             </span>
           </div>
           <div className={style["box-column"]}>
             <span className={style["title"]}>VIRTUAL</span>
             <span className={style["number"]}>
-              {/* {{ this.getAgentCountByType("virtual") }} */}1
+              {getAgentCountByType("virtual")}
             </span>
           </div>
         </div>
@@ -113,15 +159,18 @@ function Agent() {
         </div>
       </div>
       <div className={style["item-agents"]}>
-        {/* <div v-for="agent in getAgentsByType(tab)" :key="agent.id">
-      <AgentItem :agent="agent"></AgentItem>
-    </div> */}
-        {agents.map((agent: any) => (
+        {getAgentsByType(tab).map((agent: any) => (
           <AgentItem
             key={agent.id}
             agent={agent}
             dialogActive={dialogActive}
             handleShowDialog={(id: number | null) => showDialog(id)}
+            handleAddResources={(id: number, resources: string) =>
+              addResourcesByAgentId(id, resources)
+            }
+            handleDeleteResource={(id: number, resource: string) =>
+              deleteResourceByAgentId(id, resource)
+            }
           />
         ))}
       </div>

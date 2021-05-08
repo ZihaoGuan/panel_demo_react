@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./TypeTab.module.sass";
+import style from "./styles/TypeTab.module.sass";
 
 function TypeTab(props: any) {
   return (
