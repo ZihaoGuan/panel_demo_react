@@ -6,12 +6,10 @@ import "../app.sass";
 
 function Navbar(props: any) {
   return (
-    <nav
-      className={`slategray-bg ${style[props.show && "show"]}`}
-    >
+    <nav className={`slategray-bg ${style[props.show && "show"]}`}>
       <div
         className={`${style["btn-close"]}`}
-        //    @click="closeNavBar"
+        onClick={props.handleShowNavbar()}
       >
         <i className="icomoon icon-close"></i>
       </div>

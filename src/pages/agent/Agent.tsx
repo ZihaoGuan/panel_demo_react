@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./Agent.module.sass";
 import "../../assets/font-icons/fonts.css";
 
@@ -28,6 +28,13 @@ function Agent() {
       resources: [],
     },
   ];
+
+  const [tab, setTab] = useState("all");
+
+  function selectTypeTab(type: string) {
+    setTab(type);
+  }
+
   return (
     <>
       <div className={style["box-container"]}>
@@ -73,21 +80,18 @@ function Agent() {
       <div className={style["control-bar"]}>
         <TypeTab
           type="All"
-          // :active="tab === 'all'"
-          active={true}
-          // @click.native="selectTypeTab('all')"
+          active={tab === "all"}
+          onClick={() => selectTypeTab("all")}
         />
         <TypeTab
           type="Physical"
-          // :active="tab === 'physical'"
-          active={false}
-          // @click.native="selectTypeTab('physical')"
+          active={tab === "physical"}
+          onClick={() => selectTypeTab("physical")}
         />
         <TypeTab
           type="Virtual"
-          // :active="tab === 'virtual'"
-          active={false}
-          // @click.native="selectTypeTab('virtual')"
+          active={tab === "virtual"}
+          onClick={() => selectTypeTab("virtual")}
         />
         <div className={style["search-box-container"]}>
           <i className={`icomoon icon-search ${style["i-20"]}`}></i>

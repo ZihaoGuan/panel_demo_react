@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./Header.module.sass";
 import "../assets/font-icons/fonts.css";
 import "../styles/variables.sass";
@@ -7,14 +7,16 @@ import "../app.sass";
 import logo from "../assets/logo/logo.svg";
 import avatar from "../assets/logo/avatar.jpg";
 
-function Header() {
+function Header(props: any) {
+  const [isShowDropdown, setIsShowDropdown] = useState(false);
+
   return (
     <header className="white-bg">
       <div className="wrapper">
         <div className={`${style["container"]}`}>
           <div
             className={`${style["avatar"]} ${style["side"]} ${style["bread"]}`}
-            //  @click="showNavBar"
+            onClick={props.handleShowNavbar()}
           >
             <i className="icomoon icon-navicon"> </i>
           </div>
@@ -22,9 +24,12 @@ function Header() {
             <img src={logo} alt="" />
           </div>
           <div
-            className={`${style["avatar"]} ${style["side"]}`}
-            //   :className="{ show: showDropdown }"
-            //   @click="showDropdown = !showDropdown"
+            className={`${style["avatar"]} ${style["side"]} ${
+              style[isShowDropdown ? "show" : ""]
+            }`}
+            onClick={() => {
+              setIsShowDropdown(!isShowDropdown);
+            }}
           >
             <img src={avatar} alt="" />
             <i className="icomoon icon-angle-down"> </i>
