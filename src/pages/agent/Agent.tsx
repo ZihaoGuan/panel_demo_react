@@ -15,7 +15,7 @@ function Agent() {
       type: "virtual",
       ip: "11",
       location: "ff",
-      resources: [],
+      resources: ["4","55","55555"],
     },
     {
       id: 2,
@@ -31,8 +31,14 @@ function Agent() {
 
   const [tab, setTab] = useState("all");
 
+  const [dialogActive, setDialogActive] = useState<number | null>(null);
+
   function selectTypeTab(type: string) {
     setTab(type);
+  }
+
+  function showDialog(id: number | null) {
+    setDialogActive(id);
   }
 
   return (
@@ -101,7 +107,7 @@ function Agent() {
           <i className={`icomoon icon-th-card ${style["btn"]}`}></i>
         </div>
         <div
-          className={`${style["layout-tab"]} ${style["right-most"]} ${style["active"]}`}
+          className={`${style["layout-tab"]} ${style["rightmost"]} ${style["active"]}`}
         >
           <i className={`icomoon icon-th-list ${style["btn"]}`}></i>
         </div>
@@ -111,7 +117,12 @@ function Agent() {
       <AgentItem :agent="agent"></AgentItem>
     </div> */}
         {agents.map((agent: any) => (
-          <AgentItem key={agent.id} agent={agent} />
+          <AgentItem
+            key={agent.id}
+            agent={agent}
+            dialogActive={dialogActive}
+            handleShowDialog={(id: number | null) => showDialog(id)}
+          />
         ))}
       </div>
     </>

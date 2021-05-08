@@ -4,6 +4,7 @@ import style from "./AgentItem.module.sass";
 import "../../../assets/font-icons/fonts.css";
 
 import OsIcon from "./OsIcon";
+import PopupDialog from "./PopupDialog";
 
 function AgentItem(props: any) {
   const { status } = props.agent;
@@ -34,26 +35,28 @@ function AgentItem(props: any) {
           >
             <i
               className={`icomoon icon-plus i-16 ${style["btn"]}`}
-              // @click="showAgentListPopUpDialog(agent.id)"
+              onClick={() => props.handleShowDialog(props.agent.id)}
             ></i>
-            {/* <PopupDialog
-              :show="agent.id == agentShowPopUp"
-              :id="agent.id"
-            /> */}
+            <PopupDialog
+              show={props.agent.id === props.dialogActive}
+              handleCloseDialog={props.handleShowDialog}
+              // :id="agent.id"
+            />
           </div>
-          <div
-            v-for="resource in agent.resources"
-            // :key="resource"
-            className={`${style["btn-square"]} ${style["btn-delete"]}`}
-          >
-            {/* {{ resource }} */}
-            <i
-              className={`icomoon icon-trash i-16 ${style["btn"]}`}
-              // @click="
-              //   deleteResourcesByAgentId({ id: agent.id, resource: resource })
-              // "
-            ></i>
-          </div>
+          {props.agent.resources.map((res: string) => (
+            <div
+              key={res}
+              className={`${style["btn-square"]} ${style["btn-delete"]}`}
+            >
+              {res}
+              <i
+                className={`icomoon icon-trash i-16 ${style["btn"]}`}
+                // @click="
+                //   deleteResourcesByAgentId({ id: agent.id, resource: resource })
+                // "
+              ></i>
+            </div>
+          ))}
           {props.agent.status === "building" && (
             <div
               v-if="agent.status === 'building'"
