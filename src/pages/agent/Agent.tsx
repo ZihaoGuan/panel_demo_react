@@ -10,6 +10,8 @@ import API from "../../api";
 function Agent() {
   const [agents, setAgents] = useState([]);
 
+  const [agentUpdate, setAgentUpdate] = useState(0);
+
   useEffect(() => {
     API.get("agents").then((response) => setAgents(response.data));
   }, []);
@@ -56,6 +58,7 @@ function Agent() {
       const res = await API.put(`agents/${id}`, copy);
       jsonToUpdate["resources"] = res.data["resources"];
       setAgents(agents);
+      setAgentUpdate(agentUpdate + 1);
     }
   };
 
@@ -69,6 +72,7 @@ function Agent() {
       const res = await API.put(`agents/${id}`, copy);
       jsonToUpdate["resources"] = res.data["resources"];
       setAgents(agents);
+      setAgentUpdate(agentUpdate + 1);
     }
   };
 
@@ -78,6 +82,10 @@ function Agent() {
   };
 
   const [tab, setTab] = useState("all");
+
+  useEffect(() => {
+    console.log("hey");
+  }, [agentUpdate]);
 
   const [dialogActive, setDialogActive] = useState<number | null>(null);
 
