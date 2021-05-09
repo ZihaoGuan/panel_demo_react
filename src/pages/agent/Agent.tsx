@@ -9,12 +9,14 @@ import API from "../../api";
 
 function Agent() {
   const [agents, setAgents] = useState([]);
-
   const [agentUpdate, setAgentUpdate] = useState(0);
+  const [tab, setTab] = useState("all");
+  const [dialogActive, setDialogActive] = useState<number | null>(null);
 
+  // useEffect(() => {}, [agentUpdate]);
   useEffect(() => {
     API.get("agents").then((response) => setAgents(response.data));
-  }, []);
+  }, [setAgents]);
 
   const getAgentCountByStatus = (status: string) => {
     if (agents.length === 0) return;
@@ -80,12 +82,6 @@ function Agent() {
     if (type === "all") return agents;
     return agents.filter((agent: any) => agent.type === type);
   };
-
-  const [tab, setTab] = useState("all");
-
-  useEffect(() => {}, [agentUpdate]);
-
-  const [dialogActive, setDialogActive] = useState<number | null>(null);
 
   function selectTypeTab(type: string) {
     setTab(type);
