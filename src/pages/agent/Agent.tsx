@@ -12,7 +12,7 @@ function Agent() {
 
   useEffect(() => {
     API.get("agents").then((response) => setAgents(response.data));
-  });
+  }, []);
 
   const getAgentCountByStatus = (status: string) => {
     if (agents.length === 0) return;
