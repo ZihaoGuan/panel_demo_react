@@ -5,6 +5,9 @@ function Home() {
     <article>
       <h1>Home</h1>
       <p>please go to agent page</p>
+      <p>
+        Check out <a href="http://www.nekosaysmeow.cyou/agent">Vue.js version~~~</a>
+      </p>
     </article>
   );
 }
