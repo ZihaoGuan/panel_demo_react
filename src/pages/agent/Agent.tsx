@@ -83,9 +83,7 @@ function Agent() {
 
   const [tab, setTab] = useState("all");
 
-  useEffect(() => {
-    console.log("hey");
-  }, [agentUpdate]);
+  useEffect(() => {}, [agentUpdate]);
 
   const [dialogActive, setDialogActive] = useState<number | null>(null);
 
