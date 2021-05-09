@@ -25,7 +25,7 @@ function Header(props: any) {
           </div>
           <div
             className={`${style["avatar"]} ${style["side"]} ${
-              style[isShowDropdown ? "show" : ""]
+              isShowDropdown ? style["show"] : ""
             }`}
             onClick={() => {
               setIsShowDropdown(!isShowDropdown);

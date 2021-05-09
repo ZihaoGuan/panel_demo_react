@@ -10,7 +10,7 @@ function PopupDialog(props: any) {
   return (
     <div
       className={`${style["popup-window"]} white-bg ${
-        style[props.show ? "show" : ""]
+        props.show ? style["show"] : ""
       }`}
     >
       <div
