@@ -9,12 +9,17 @@ import API from "../../api";
 
 function Agent() {
   const [agents, setAgents] = useState([]);
+  const [agentsUpdate, setAgentsUpdate] = useState(0);
   const [tab, setTab] = useState("all");
   const [dialogActive, setDialogActive] = useState<number | null>(null);
 
   useEffect(() => {
     API.get("agents").then((response) => setAgents(response.data));
-  }, [setAgents]);
+  }, []);
+
+  useEffect(() => {
+  }, [agentsUpdate]);
+
 
   const getAgentCountByStatus = (status: string) => {
     if (agents.length === 0) return;
@@ -58,6 +63,7 @@ function Agent() {
       const res = await API.put(`agents/${id}`, copy);
       jsonToUpdate["resources"] = res.data["resources"];
       setAgents(agents);
+      setAgentsUpdate(agentsUpdate + 1);
     }
   };
 
@@ -71,6 +77,7 @@ function Agent() {
       const res = await API.put(`agents/${id}`, copy);
       jsonToUpdate["resources"] = res.data["resources"];
       setAgents(agents);
+      setAgentsUpdate(agentsUpdate + 1);
     }
   };
 
