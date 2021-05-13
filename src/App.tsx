@@ -25,7 +25,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       {/* <AppProvider> */}
       <Header handleShowNavbar={() => showNavbar} />
       <div className="wrapper">
