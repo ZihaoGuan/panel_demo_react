@@ -25,7 +25,7 @@ function App() {
   }
 
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename="/Cruise/ReactJs">
       {/* <AppProvider> */}
       <Header handleShowNavbar={() => showNavbar} />
       <div className="wrapper">
