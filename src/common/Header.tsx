@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Header.module.sass";
 import "../assets/font-icons/fonts.css";
 import "../styles/variables.sass";
@@ -9,6 +9,18 @@ import avatar from "../assets/logo/avatar.jpg";
 
 function Header(props: any) {
   const [isShowDropdown, setIsShowDropdown] = useState(false);
+  const handleScroll = () => {
+    setIsShowDropdown(false);
+  };
+
+  useEffect(() => {
+    // Anything in here is fired on component mount.
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // Anything in here is fired on component unmount.
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <header className="white-bg">
