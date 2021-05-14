@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Agent from "./pages/agent/Agent";
 import Footer from "./common/Footer";
 import Header from "./common/Header";
@@ -10,7 +10,7 @@ import Help from "./pages/help/Help";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./styles/app.global.sass";
-import "./assets/font-icons/fonts.css"; 
+import "./assets/font-icons/fonts.css";
 
 function App() {
   const [isShowNavbar, setIsShowNavbar] = useState(false);
@@ -22,6 +22,13 @@ function App() {
   function closeNavbar() {
     setIsShowNavbar(false);
   }
+
+  useEffect(() => {
+    window.addEventListener("scroll", closeNavbar);
+    return () => {
+      window.removeEventListener("scroll", closeNavbar);
+    };
+  }, []);
 
   return (
     <Router basename="/Cruise/ReactJs">
