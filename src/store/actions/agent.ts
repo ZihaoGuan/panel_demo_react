@@ -26,7 +26,7 @@ const deleteResourceSuccess = (agents: IAgent[]) => {
   calls the api, then dispatches the synchronous action creator
 */
 export const fetchAgents = () => {
-    return async (dispatch: Function) => {
+    return async (dispatch: AgentDispatchType) => {
         try {
             const agents = await API.get("agents")
             dispatch(fetchAgentsSuccess(agents.data));
@@ -37,7 +37,7 @@ export const fetchAgents = () => {
 }
 
 export const addResources = (id: number, resources: string) => {
-    return async (dispatch: Function, getState: Function) => {
+    return async (dispatch: AgentDispatchType, getState: Function) => {
         try {
             const resourcesToAdd = resources.split(",");
             const agents = getState().agent.agents;
@@ -59,7 +59,7 @@ export const addResources = (id: number, resources: string) => {
     }
 }
 export const deleteResources = (id: number, resource: string) => {
-    return async (dispatch: Function, getState: Function) => {
+    return async (dispatch: AgentDispatchType, getState: Function) => {
         try {
             const agents = getState().agent.agents;
             const jsonToUpdate: IAgent = agents.find((agent: IAgent) => agent.id === id);
@@ -76,17 +76,5 @@ export const deleteResources = (id: number, resource: string) => {
         catch (e) {
             console.log(e)
         }
-    }
-}
-
-export const turnOnCover = () => {
-    return  {
-        type: actionTypes.TURN_ON_COVER
-    }
-}
-
-export const turnOffCover = () => {
-    return  {
-        type: actionTypes.TURN_OFF_COVER
     }
 }

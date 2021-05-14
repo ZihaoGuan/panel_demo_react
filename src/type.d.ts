@@ -36,4 +36,5 @@ type CoverAction = {
     type: string;
 }
 
-//type DispatchType = (args: AgentAction) => AgentAction;
+type AgentDispatchType = (args: AgentAction) => AgentAction;
+type CoverDispatchType = (args: CoverAction) => CoverAction;
