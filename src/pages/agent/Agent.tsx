@@ -11,15 +11,15 @@ import "../../assets/font-icons/fonts.css";
 import AgentItem from "./components/AgentItem";
 import TypeTab from "./components/TypeTab";
 
-import API from "../../api/request";
-
 function Agent() {
   const [tab, setTab] = useState("all");
   const [dialogActive, setDialogActive] = useState<number | null>(null);
 
-  const agents: readonly IAgent[] = useSelector(
-    (state: AgentState) => state.agents
-  );
+  const agents: readonly IAgent[] = useSelector((state: any) => {
+    return state.agent.agents;
+  });
+
+  const updatedAt: string = useSelector((state: any) => state.agent.updatedAt);
 
   const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ function Agent() {
     dispatch(fetchAgents());
   }, []);
 
-  useEffect(() => {}, [agents]);
+  useEffect(() => {}, [updatedAt]);
 
   const getAgentCountByStatus = (status: string) => {
     if (agents.length === 0) return;

@@ -37,7 +37,7 @@ export const addResources = (id: number, resources: string) => {
     return async (dispatch: any, getState: Function) => {
         try {
             const resourcesToAdd = resources.split(",");
-            const agents = getState().agents;
+            const agents = getState().agent.agents;
             const jsonToUpdate: IAgent = agents.find((agent: any) => agent.id === id);
             if (jsonToUpdate) {
                 const copy = JSON.parse(JSON.stringify(jsonToUpdate));
@@ -58,7 +58,7 @@ export const addResources = (id: number, resources: string) => {
 export const deleteResources = (id: number, resource: string) => {
     return async (dispatch: any, getState: Function) => {
         try {
-            const agents = getState().agents;
+            const agents = getState().agent.agents;
             const jsonToUpdate: any = agents.find((agent: any) => agent.id === id);
             if (jsonToUpdate) {
                 const copy = JSON.parse(JSON.stringify(jsonToUpdate));
@@ -74,5 +74,4 @@ export const deleteResources = (id: number, resource: string) => {
             console.log(e)
         }
     }
-
 }
