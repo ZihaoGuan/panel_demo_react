@@ -2,7 +2,12 @@ import React, { useState } from "react";
 
 import style from "./styles/PopupDialog.module.sass";
 
-function PopupDialog(props: any) {
+const PopupDialog: React.FC<{
+  show: Boolean;
+  handleAddResources: Function;
+  handleCloseDialog: Function;
+  id: number;
+}> = ({ show, handleAddResources, handleCloseDialog, id }) => {
   const [value, setValue] = useState<string>("");
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
@@ -10,12 +15,12 @@ function PopupDialog(props: any) {
   return (
     <div
       className={`${style["popup-window"]} white-bg ${
-        props.show ? style["show"] : ""
+        show ? style["show"] : ""
       }`}
     >
       <div
         className={`${style["btn-close"]} ${style["btn"]}`}
-        onClick={() => props.handleCloseDialog(null)}
+        onClick={() => handleCloseDialog(null)}
       >
         <i className="icomoon icon-close"></i>
       </div>
@@ -34,22 +39,22 @@ function PopupDialog(props: any) {
         <div
           className={`${style["btn-square"]} ${style["btn"]} ${style["btn-blue"]} ${style["btn-add-resources"]}`}
           onClick={() => {
-            props.handleAddResources(props.id, value);
+            handleAddResources(id, value);
             setValue("");
-            props.handleCloseDialog(null);
+            handleCloseDialog(null);
           }}
         >
           Add Resources
         </div>
         <div
           className={`${style["btn-square"]} ${style["btn"]} ${style["btn-gray"]} ${style["btn-cancel"]}`}
-          onClick={() => props.handleCloseDialog(null)}
+          onClick={() => handleCloseDialog(null)}
         >
           Cancel
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default PopupDialog;

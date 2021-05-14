@@ -26,7 +26,7 @@ const deleteResourceSuccess = (agents: IAgent[]) => {
   calls the api, then dispatches the synchronous action creator
 */
 export const fetchAgents = () => {
-    return async (dispatch: any) => {
+    return async (dispatch: Function) => {
         try {
             const agents = await API.get("agents")
             dispatch(fetchAgentsSuccess(agents.data));
@@ -37,11 +37,11 @@ export const fetchAgents = () => {
 }
 
 export const addResources = (id: number, resources: string) => {
-    return async (dispatch: any, getState: Function) => {
+    return async (dispatch: Function, getState: Function) => {
         try {
             const resourcesToAdd = resources.split(",");
             const agents = getState().agent.agents;
-            const jsonToUpdate: IAgent = agents.find((agent: any) => agent.id === id);
+            const jsonToUpdate: IAgent = agents.find((agent: IAgent) => agent.id === id);
             if (jsonToUpdate) {
                 const copy = JSON.parse(JSON.stringify(jsonToUpdate));
                 resourcesToAdd.forEach((element) => {
@@ -59,10 +59,10 @@ export const addResources = (id: number, resources: string) => {
     }
 }
 export const deleteResources = (id: number, resource: string) => {
-    return async (dispatch: any, getState: Function) => {
+    return async (dispatch: Function, getState: Function) => {
         try {
             const agents = getState().agent.agents;
-            const jsonToUpdate: any = agents.find((agent: any) => agent.id === id);
+            const jsonToUpdate: IAgent = agents.find((agent: IAgent) => agent.id === id);
             if (jsonToUpdate) {
                 const copy = JSON.parse(JSON.stringify(jsonToUpdate));
                 copy["resources"] = copy["resources"].filter(

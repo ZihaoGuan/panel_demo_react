@@ -5,12 +5,15 @@ import "../styles/variables.sass";
 import "../app.sass";
 import { NavLink } from "react-router-dom";
 
-function Navbar(props: any) {
+const Navbar: React.FC<{ show: Boolean; handleShowNavbar: Function }> = ({
+  handleShowNavbar,
+  show,
+}) => {
   return (
-    <nav className={`slategray-bg ${props.show ? style["show"] : ""}`}>
+    <nav className={`slategray-bg ${show ? style["show"] : ""}`}>
       <div
         className={`${style["btn-close"]}`}
-        onClick={props.handleShowNavbar()}
+        onClick={handleShowNavbar()}
       >
         <i className="icomoon icon-close"></i>
       </div>
@@ -54,6 +57,6 @@ function Navbar(props: any) {
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

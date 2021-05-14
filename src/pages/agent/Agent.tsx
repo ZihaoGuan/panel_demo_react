@@ -15,11 +15,13 @@ function Agent() {
   const [tab, setTab] = useState("all");
   const [dialogActive, setDialogActive] = useState<number | null>(null);
 
-  const agents: readonly IAgent[] = useSelector((state: any) => {
+  const agents: readonly IAgent[] = useSelector((state: States) => {
     return state.agent.agents;
   });
 
-  const updatedAt: string = useSelector((state: any) => state.agent.updatedAt);
+  const updatedAt: string = useSelector(
+    (state: States) => state.agent.updatedAt
+  );
 
   const dispatch = useDispatch();
 
@@ -31,7 +33,7 @@ function Agent() {
 
   const getAgentCountByStatus = (status: string) => {
     if (agents.length === 0) return;
-    const count = agents.reduce((acc: any, cur: any) => {
+    const count = agents.reduce((acc: number, cur: IAgent) => {
       if (cur.status === status) {
         return ++acc;
       } else {
@@ -48,7 +50,7 @@ function Agent() {
 
   const getAgentCountByType = (type: string) => {
     if (agents.length === 0) return;
-    const count = agents.reduce((acc: any, cur: any) => {
+    const count = agents.reduce((acc: number, cur: IAgent) => {
       if (cur.type === type) {
         return ++acc;
       } else {
@@ -67,7 +69,7 @@ function Agent() {
 
   const getAgentsByType = (type: string) => {
     if (type === "all") return agents;
-    return agents.filter((agent: any) => agent.type === type);
+    return agents.filter((agent: IAgent) => agent.type === type);
   };
 
   function selectTypeTab(type: string) {
@@ -151,7 +153,7 @@ function Agent() {
 
   const itemList = (
     <div className={style["item-agents"]}>
-      {getAgentsByType(tab).map((agent: any) => (
+      {getAgentsByType(tab).map((agent: IAgent) => (
         <AgentItem
           key={agent.id}
           agent={agent}

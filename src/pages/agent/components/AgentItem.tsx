@@ -6,27 +6,39 @@ import "../../../assets/font-icons/fonts.css";
 import OsIcon from "./OsIcon";
 import PopupDialog from "./PopupDialog";
 
-function AgentItem(props: any) {
-  const { status } = props.agent;
+const AgentItem: React.FC<{
+  agent: IAgent;
+  handleShowDialog: Function;
+  handleAddResources: Function;
+  dialogActive: number | null;
+  handleDeleteResource: Function;
+}> = ({
+  agent,
+  handleShowDialog,
+  handleAddResources,
+  handleDeleteResource,
+  dialogActive,
+}) => {
+  const { status } = agent;
   return (
-    <div className={`${style["item"]} ${style[props.agent.status]} white-bg`}>
-      <OsIcon os={props.agent.os} />
+    <div className={`${style["item"]} ${style[agent.status]} white-bg`}>
+      <OsIcon os={agent.os} />
       <div className={`${style["column"]}`}>
         <div className={`${style["row"]} ${style["row-1"]}`}>
           <div className={`light-cyan-text`}>
             <i className={`icomoon icon-desktop i-16`}></i>
-            {props.agent.name}
+            {agent.name}
           </div>
           <div className={`${style[status]} ${style["status"]} white-text `}>
-            {props.agent.status}
+            {agent.status}
           </div>
           <div className={style["ip"]}>
             <i className={`icomoon icon-info i-16`}></i>
-            {props.agent.ip}
+            {agent.ip}
           </div>
           <div className={style["location"]}>
             <i className={`icomoon icon-folder i-16`}></i>
-            {props.agent.location}
+            {agent.location}
           </div>
         </div>
         <div className={`${style["row"]} ${style["row-2"]}`}>
@@ -35,16 +47,16 @@ function AgentItem(props: any) {
           >
             <i
               className={`icomoon icon-plus i-16 ${style["btn"]}`}
-              onClick={() => props.handleShowDialog(props.agent.id)}
+              onClick={() => handleShowDialog(agent.id)}
             ></i>
             <PopupDialog
-              show={props.agent.id === props.dialogActive}
-              handleCloseDialog={props.handleShowDialog}
-              handleAddResources={props.handleAddResources}
-              id={props.agent.id}
+              show={agent.id === dialogActive}
+              handleCloseDialog={handleShowDialog}
+              handleAddResources={handleAddResources}
+              id={agent.id}
             />
           </div>
-          {props.agent.resources.map((res: string) => (
+          {agent.resources.map((res: string) => (
             <div
               key={res}
               className={`${style["btn-square"]} ${style["btn-delete"]}`}
@@ -52,11 +64,11 @@ function AgentItem(props: any) {
               {res}
               <i
                 className={`icomoon icon-trash i-16 ${style["btn"]}`}
-                onClick={() => props.handleDeleteResource(props.agent.id, res)}
+                onClick={() => handleDeleteResource(agent.id, res)}
               ></i>
             </div>
           ))}
-          {props.agent.status === "building" && (
+          {agent.status === "building" && (
             <div
               v-if="agent.status === 'building'"
               className={`${style["btn-square"]} ${style["rightmost"]} ${style["btn-blue"]} ${style["btn"]}`}
@@ -69,6 +81,6 @@ function AgentItem(props: any) {
       </div>
     </div>
   );
-}
+};
 
 export default AgentItem;

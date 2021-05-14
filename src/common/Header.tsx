@@ -7,7 +7,9 @@ import "../app.sass";
 import logo from "../assets/logo/logo.svg";
 import avatar from "../assets/logo/avatar.jpg";
 
-function Header(props: any) {
+const Header: React.FC<{ handleShowNavbar: Function }> = ({
+  handleShowNavbar,
+}) => {
   const [isShowDropdown, setIsShowDropdown] = useState(false);
   const handleScroll = () => {
     setIsShowDropdown(false);
@@ -28,7 +30,7 @@ function Header(props: any) {
         <div className={`${style["container"]}`}>
           <div
             className={`${style["avatar"]} ${style["side"]} ${style["bread"]}`}
-            onClick={props.handleShowNavbar()}
+            onClick={handleShowNavbar()}
           >
             <i className="icomoon icon-navicon"> </i>
           </div>
@@ -64,6 +66,6 @@ function Header(props: any) {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

@@ -13,6 +13,10 @@ type AgentPayload = {
     agents: IAgent[],
 }
 
+type States = {
+    agent: AgentState
+}
+
 type AgentState = {
     agents: IAgent[];
     updatedAt: string;
