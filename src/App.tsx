@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Agent from "./pages/agent/Agent";
 import Footer from "./common/Footer";
 import Header from "./common/Header";
@@ -14,6 +15,10 @@ import "./assets/font-icons/fonts.css";
 
 function App() {
   const [isShowNavbar, setIsShowNavbar] = useState(false);
+
+  const isCoverOn: Boolean = useSelector(
+    (state: States) => state.cover.coverOn
+  );
 
   function showNavbar() {
     setIsShowNavbar(true);
@@ -53,6 +58,7 @@ function App() {
         </main>
       </div>
       <Footer />
+      <div className={`${isCoverOn ? "cover" : ""}`}></div>
     </Router>
   );
 }

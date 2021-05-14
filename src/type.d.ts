@@ -15,6 +15,7 @@ type AgentPayload = {
 
 type States = {
     agent: AgentState
+    cover: CoverState
 }
 
 type AgentState = {
@@ -27,4 +28,12 @@ type AgentAction = {
     payload: AgentPayload;
 };
 
-type DispatchType = (args: AgentAction) => AgentAction;
+type CoverState = {
+    coverOn: Boolean;
+}
+
+type CoverAction = {
+    type: string;
+}
+
+//type DispatchType = (args: AgentAction) => AgentAction;

@@ -10,7 +10,7 @@ const addResourcesSuccess = (agents: IAgent[]) => {
 
 const fetchAgentsSuccess = (agents: IAgent[]) => {
     return {
-        type: actionTypes.LOADED,
+        type: actionTypes.AGENTS_LOADED,
         payload: { agents }
     }
 }
@@ -76,5 +76,17 @@ export const deleteResources = (id: number, resource: string) => {
         catch (e) {
             console.log(e)
         }
+    }
+}
+
+export const turnOnCover = () => {
+    return  {
+        type: actionTypes.TURN_ON_COVER
+    }
+}
+
+export const turnOffCover = () => {
+    return  {
+        type: actionTypes.TURN_OFF_COVER
     }
 }

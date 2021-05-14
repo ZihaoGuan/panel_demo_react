@@ -4,6 +4,8 @@ import {
   fetchAgents,
   addResources,
   deleteResources,
+  turnOnCover,
+  turnOffCover,
 } from "../../store/actions";
 import style from "./Agent.module.sass";
 
@@ -29,6 +31,14 @@ function Agent() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {}, [updatedAt]);
+
+  useEffect(() => {
+    if (dialogActive) {
+      dispatch(turnOnCover());
+    }else{
+      dispatch(turnOffCover());
+    }
+  }, [dialogActive]);
 
   const getAgentCountByStatus = (status: string) => {
     if (agents.length === 0) return;
