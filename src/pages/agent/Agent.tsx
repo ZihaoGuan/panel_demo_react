@@ -26,7 +26,7 @@ function Agent() {
 
   useEffect(() => {
     dispatch(fetchAgents());
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {}, [updatedAt]);
 
@@ -58,13 +58,6 @@ function Agent() {
     }, 0);
     return count;
   };
-
-  const addResourcesByAgentId = (id: number, resources: string) => {
-    dispatch(addResources(id, resources));
-  };
-
-  const deleteResourceByAgentId = (id: number, resource: string) =>
-    dispatch(deleteResources(id, resource));
 
   const getAgentsByType = (type: string) => {
     if (type === "all") return agents;
@@ -159,10 +152,10 @@ function Agent() {
           dialogActive={dialogActive}
           handleShowDialog={(id: number | null) => showDialog(id)}
           handleAddResources={(id: number, resources: string) =>
-            addResourcesByAgentId(id, resources)
+            dispatch(addResources(id, resources))
           }
           handleDeleteResource={(id: number, resource: string) =>
-            deleteResourceByAgentId(id, resource)
+            dispatch(deleteResources(id, resource))
           }
         />
       ))}
