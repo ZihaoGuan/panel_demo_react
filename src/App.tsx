@@ -9,7 +9,8 @@ import Help from "./pages/help/Help";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import "./app.sass";
+import "./styles/app.global.sass";
+import "./assets/font-icons/fonts.css"; 
 
 function App() {
   const [isShowNavbar, setIsShowNavbar] = useState(false);

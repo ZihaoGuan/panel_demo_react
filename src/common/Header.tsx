@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./Header.module.sass";
 import "../assets/font-icons/fonts.css";
-import "../styles/variables.sass";
-import "../app.sass";
 
 import logo from "../assets/logo/logo.svg";
 import avatar from "../assets/logo/avatar.jpg";

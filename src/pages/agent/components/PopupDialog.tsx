@@ -12,18 +12,45 @@ const PopupDialog: React.FC<{
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
   };
+
+  const buttonClose = (
+    <div
+      className={`${style["btn-close"]} ${style["btn"]}`}
+      onClick={() => handleCloseDialog(null)}
+    >
+      <i className="icomoon icon-close"></i>
+    </div>
+  );
+
+  const buttonAdd = (
+    <div
+      className={`${style["btn-square"]} ${style["btn"]} ${style["btn-blue"]} ${style["btn-add-resources"]}`}
+      onClick={() => {
+        handleAddResources(id, value);
+        setValue("");
+        handleCloseDialog(null);
+      }}
+    >
+      Add Resources
+    </div>
+  );
+
+  const buttonCancel = (
+    <div
+      className={`${style["btn-square"]} ${style["btn"]} ${style["btn-gray"]} ${style["btn-cancel"]}`}
+      onClick={() => handleCloseDialog(null)}
+    >
+      Cancel
+    </div>
+  );
+
   return (
     <div
       className={`${style["popup-window"]} white-bg ${
         show ? style["show"] : ""
       }`}
     >
-      <div
-        className={`${style["btn-close"]} ${style["btn"]}`}
-        onClick={() => handleCloseDialog(null)}
-      >
-        <i className="icomoon icon-close"></i>
-      </div>
+      {buttonClose}
       <div className={`${style["row"]}`}>
         <p>Seperate multiple resource name with commas</p>
       </div>
@@ -36,22 +63,8 @@ const PopupDialog: React.FC<{
         />
       </div>
       <div className={`${style["row"]}`}>
-        <div
-          className={`${style["btn-square"]} ${style["btn"]} ${style["btn-blue"]} ${style["btn-add-resources"]}`}
-          onClick={() => {
-            handleAddResources(id, value);
-            setValue("");
-            handleCloseDialog(null);
-          }}
-        >
-          Add Resources
-        </div>
-        <div
-          className={`${style["btn-square"]} ${style["btn"]} ${style["btn-gray"]} ${style["btn-cancel"]}`}
-          onClick={() => handleCloseDialog(null)}
-        >
-          Cancel
-        </div>
+        {buttonAdd}
+        {buttonCancel}
       </div>
     </div>
   );

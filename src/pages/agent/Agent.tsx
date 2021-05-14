@@ -6,7 +6,6 @@ import {
   deleteResources,
 } from "../../store/actions";
 import style from "./Agent.module.sass";
-import "../../assets/font-icons/fonts.css";
 
 import AgentItem from "./components/AgentItem";
 import TypeTab from "./components/TypeTab";
@@ -27,7 +26,7 @@ function Agent() {
 
   useEffect(() => {
     dispatch(fetchAgents());
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {}, [updatedAt]);
 

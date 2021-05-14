@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/variables.sass";
+
 import "./Footer.module.sass";
 import "../assets/font-icons/fonts.css";
 

@@ -1,8 +1,6 @@
 import React from "react";
 
 import style from "./Navbar.module.sass";
-import "../styles/variables.sass";
-import "../app.sass";
 import { NavLink } from "react-router-dom";
 
 const Navbar: React.FC<{ show: Boolean; handleShowNavbar: Function }> = ({
