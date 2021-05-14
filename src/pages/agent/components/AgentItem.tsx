@@ -73,12 +73,14 @@ const AgentItem: React.FC<{
               className={`icomoon icon-plus i-16 ${style["btn"]}`}
               onClick={() => handleShowDialog(agent.id)}
             ></i>
-            <PopupDialog
-              show={agent.id === dialogActive}
-              handleCloseDialog={handleShowDialog}
-              handleAddResources={handleAddResources}
-              id={agent.id}
-            />
+            {agent.id === dialogActive && (
+              <PopupDialog
+                show={agent.id === dialogActive}
+                handleCloseDialog={handleShowDialog}
+                handleAddResources={handleAddResources}
+                id={agent.id}
+              />
+            )}
           </div>
           {resources}
           {buttonDeny}

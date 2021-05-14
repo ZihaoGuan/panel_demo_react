@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import style from "./styles/PopupDialog.module.sass";
 
@@ -11,6 +11,22 @@ const PopupDialog: React.FC<{
   const [value, setValue] = useState<string>("");
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
+  };
+
+  const ref = useRef(null);
+
+  const useClickOutside = (ref: any) => {
+    useEffect(() => {
+      function handleClickOutside(e: any) {
+        if (ref.current && !ref.current.contains(e.target)) {
+          handleCloseDialog(null);
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
   };
 
   const buttonClose = (
@@ -44,8 +60,11 @@ const PopupDialog: React.FC<{
     </div>
   );
 
+  useClickOutside(ref);
+
   return (
     <div
+      ref={ref}
       className={`${style["popup-window"]} white-bg ${
         show ? style["show"] : ""
       }`}
