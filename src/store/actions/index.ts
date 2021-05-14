@@ -22,6 +22,9 @@ const deleteResourceSuccess = (agents: IAgent[]) => {
     }
 }
 
+/*asynchronous thunk action creator
+  calls the api, then dispatches the synchronous action creator
+*/
 export const fetchAgents = () => {
     return async (dispatch: any) => {
         try {
