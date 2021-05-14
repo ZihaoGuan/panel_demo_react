@@ -3,11 +3,10 @@ import React, { useState, useRef, useEffect } from "react";
 import style from "./styles/PopupDialog.module.sass";
 
 const PopupDialog: React.FC<{
-  show: Boolean;
   handleAddResources: Function;
   handleCloseDialog: Function;
   id: number;
-}> = ({ show, handleAddResources, handleCloseDialog, id }) => {
+}> = ({  handleAddResources, handleCloseDialog, id }) => {
   const [value, setValue] = useState<string>("");
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
@@ -63,12 +62,7 @@ const PopupDialog: React.FC<{
   useClickOutside(ref);
 
   return (
-    <div
-      ref={ref}
-      className={`${style["popup-window"]} white-bg ${
-        show ? style["show"] : ""
-      }`}
-    >
+    <div ref={ref} className={`${style["popup-window"]} white-bg`}>
       {buttonClose}
       <div className={`${style["row"]}`}>
         <p>Seperate multiple resource name with commas</p>

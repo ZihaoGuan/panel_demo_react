@@ -75,7 +75,6 @@ const AgentItem: React.FC<{
             ></i>
             {agent.id === dialogActive && (
               <PopupDialog
-                show={agent.id === dialogActive}
                 handleCloseDialog={handleShowDialog}
                 handleAddResources={handleAddResources}
                 id={agent.id}
