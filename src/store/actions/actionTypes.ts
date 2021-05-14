@@ -1,0 +1,3 @@
+export const ADD_RESOURCES = "ADD_RESOURCES";
+export const DELETE_RESOURCE = "DELETE_RESOURCE";
+export const LOADED = "LOADED";

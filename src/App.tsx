@@ -9,8 +9,6 @@ import Help from "./pages/help/Help";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-//import { AppProvider } from "./store/context";
-
 import "./app.sass";
 
 function App() {
@@ -26,7 +24,6 @@ function App() {
 
   return (
     <Router basename="/Cruise/ReactJs">
-      {/* <AppProvider> */}
       <Header handleShowNavbar={() => showNavbar} />
       <div className="wrapper">
         <Navbar show={isShowNavbar} handleShowNavbar={() => closeNavbar} />
@@ -48,7 +45,6 @@ function App() {
         </main>
       </div>
       <Footer />
-      {/* </AppProvider> */}
     </Router>
   );
 }
