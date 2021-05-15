@@ -25,19 +25,27 @@ function Agent() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAgents());
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const useHandleCover = () => {
+    useEffect(() => {
+      if (dialogActive) {
+        dispatch(turnOnCover());
+      } else {
+        dispatch(turnOffCover());
+      }
+    }, [dialogActive]); // eslint-disable-line react-hooks/exhaustive-deps
+  };
+
+  const useFetchData = () => {
+    useEffect(() => {
+      dispatch(fetchAgents());
+    }, []);
+  };
+
+  useFetchData();
 
   useEffect(() => {}, [updatedAt]);
 
-  useEffect(() => {
-    if (dialogActive) {
-      dispatch(turnOnCover());
-    } else {
-      dispatch(turnOffCover());
-    }
-  }, [dialogActive]);// eslint-disable-line react-hooks/exhaustive-deps
+  useHandleCover();
 
   const getAgentCountByStatus = (status: string) => {
     if (agents.length === 0) return;
