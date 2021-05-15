@@ -6,7 +6,7 @@ const PopupDialog: React.FC<{
   handleAddResources: Function;
   handleCloseDialog: Function;
   id: number;
-}> = ({  handleAddResources, handleCloseDialog, id }) => {
+}> = ({ handleAddResources, handleCloseDialog, id }) => {
   const [value, setValue] = useState<string>("");
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
@@ -27,6 +27,24 @@ const PopupDialog: React.FC<{
       };
     }, [ref]);
   };
+
+  useEffect(() => {
+    const listener = (event: any) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        event.preventDefault();
+        console.log(id,value);
+        handleAddResources(id, value);
+        setValue("");
+        handleCloseDialog(null);
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [value]);
+
+  useClickOutside(ref);
 
   const buttonClose = (
     <div
@@ -58,8 +76,6 @@ const PopupDialog: React.FC<{
       Cancel
     </div>
   );
-
-  useClickOutside(ref);
 
   return (
     <div ref={ref} className={`${style["popup-window"]} white-bg`}>
