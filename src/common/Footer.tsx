@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer>
       <p>
-        &#169; Copyright 2017 <strong>Thought</strong>Works
+        Powered by <strong>ReactJs</strong>
       </p>
     </footer>
   );
