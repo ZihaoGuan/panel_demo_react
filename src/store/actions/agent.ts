@@ -28,8 +28,9 @@ const deleteResourceSuccess = (agents: IAgent[]) => {
 export const fetchAgents = () => {
     return async (dispatch: AgentDispatchType) => {
         try {
-            const agents = await API.get("agents")
+            const agents = await API.get("AgentItems")
             dispatch(fetchAgentsSuccess(agents.data));
+            
         } catch (e) {
             console.log(e)
         }
@@ -49,7 +50,7 @@ export const addResources = (id: number, resources: string) => {
                         copy["resources"].push(element);
                     }
                 });
-                const res = await API.put(`agents/${id}`, copy);
+                const res = await API.put(`AgentItems/${id}`, copy);
                 jsonToUpdate["resources"] = res.data["resources"];
                 dispatch(addResourcesSuccess(agents));
             }
@@ -68,7 +69,7 @@ export const deleteResources = (id: number, resource: string) => {
                 copy["resources"] = copy["resources"].filter(
                     (e: string) => e !== resource
                 );
-                const res = await API.put(`agents/${id}`, copy);
+                const res = await API.put(`AgentItems/${id}`, copy);
                 jsonToUpdate["resources"] = res.data["resources"];
                 dispatch(deleteResourceSuccess(agents));
             }
